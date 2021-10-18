@@ -1,1 +1,1 @@
-# LeetCode-Important-Algorithms
+Leetcode algorithm - 2 study plan solutions.
