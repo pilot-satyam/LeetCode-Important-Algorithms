@@ -1,3 +1,5 @@
+/* Since it is given the shortest path , we need to use the BFS*/
+
 class Solution {
 public:
     int shortestPathBinaryMatrix(vector<vector<int>>& g) {
