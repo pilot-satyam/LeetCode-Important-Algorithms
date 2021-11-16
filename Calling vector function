@@ -1,0 +1,14 @@
+int main()
+    {
+        string s;
+        cin>>s;
+        vector<vector<string>> v=partition(s); //partiton(s) is "function name", v is the vector name which we are using to call the function
+        for(int i=0;i<v.size();i++)
+        {
+            for(int j=0;j<v[0].size();j++)
+            {
+                cout<<v[i][j]<<" ";
+                cout<<endl;
+            }
+        }
+    }
