@@ -1,0 +1,46 @@
+class Solution {
+public:
+    void dfs(int r, int c, vector<vector<int>>& grid, vector<vector<bool>> &vis, int &count){
+        
+        int n = grid.size();
+        int m =  grid[0].size();
+        
+        if(r<0 || c<0 || r>=n || c>=m || vis[r][c] || grid[r][c] == 0)
+            return;
+        
+        count++;
+        vis[r][c] = true;
+        
+        dfs(r+1,c,grid,vis,count);
+        dfs(r-1,c,grid,vis,count);
+        dfs(r,c+1,grid,vis,count);
+        dfs(r,c-1,grid,vis,count);
+        
+    }
+    
+    int maxAreaOfIsland(vector<vector<int>>& grid) {
+        
+        int n = grid.size();
+        int m =  grid[0].size();
+        
+        vector<vector<bool>> vis(n, vector<bool>(m,false)) ;
+        
+        int ans = 0;
+        
+        for(int i = 0 ; i < n ; i++){
+            
+            for(int j = 0 ; j < m ; j++){
+                
+                int count = 0;
+                
+                if(!vis[i][j] && grid[i][j] == 1)
+                    dfs(i,j,grid,vis,count);
+                
+                ans = max(ans,count);
+            }
+            
+        }
+        
+        return ans;
+    }
+};
