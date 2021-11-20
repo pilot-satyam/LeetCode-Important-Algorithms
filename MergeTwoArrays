@@ -1,0 +1,8 @@
+
+/* Here m is the size of num1*/
+/*n is the size of num2*/
+
+for(int i=m;i<n+m;i++){
+            nums1[i]=nums2[i-m];
+        }
+       
