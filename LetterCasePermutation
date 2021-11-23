@@ -13,9 +13,9 @@ public:
         }
         char c = s[i];
         if(isdigit(c)) {
-            permutation(s, i+1, res + c);
+            permutation(s, i+1, res + c);  //checks if it is a digit,then the recursion will continue 
         } else {
-            char C = isupper(c)? tolower(c) : toupper(c); 
+            char C = isupper(c)? tolower(c) : toupper(c); //if the letter is upper case then it will convert it into lower case and vice versa
             permutation(s, i+1, res + c);
             permutation(s, i+1, res + C);
         }
