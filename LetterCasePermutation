@@ -1,0 +1,23 @@
+class Solution {
+ vector<string> ans;
+public:
+    vector<string> letterCasePermutation(string s) {
+        permutation(s, 0);
+        return ans;
+    }
+    
+    void permutation(string s, int i, string res = "") {
+        if(i == s.length()) {
+            ans.push_back(res);
+            return;
+        }
+        char c = s[i];
+        if(isdigit(c)) {
+            permutation(s, i+1, res + c);
+        } else {
+            char C = isupper(c)? tolower(c) : toupper(c); 
+            permutation(s, i+1, res + c);
+            permutation(s, i+1, res + C);
+        }
+    }
+};
