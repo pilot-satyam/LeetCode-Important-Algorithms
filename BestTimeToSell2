@@ -1,0 +1,81 @@
+
+An Important point to note here in the question is: "However, you can buy it then immediately sell it on the same day."
+
+so let's see different trends in the prices vector.
+The whole prices vector can be divided into segments where each of those segments falls under any one of the below categories.
+Case 1: it is decreasing (or non-increasing)
+
+Eg : 9 , 5 , 4 , 4, 2 , 1
+Case 2 : if it is increasing (or non decreasing)
+
+Eg : 1, 2, 3, 4, 6, 6, 8, 10
+Case 3: constant (this case can be considered as a part of case 1 or case 2. It doesn't affect the solution). So we don't talk about case 3 separately
+
+Eg : 1, 1, 1, 1, 1, 1
+Assumption (let's prove it)
+Now I propose my assumption that I always sell the stock on (i+1)th day if I buy it on i-th day.
+As of now, it's just an assumption. Let's prove it.
+
+Case 1:
+
+Eg : 9 , 5 , 4 , 4, 2 , 1
+Here the best way is not to buy at all. So optimal net profit is zero.
+So, what if I tell it is equivalent to buy on i-th day and sell on (i+1)th day if prices[i+1] > prices[i].
+Since that condition won't be satisfied in this type of segment. Net profit will be zero.
+(So Assumption is true for Case 1)
+Case 2 :
+
+Eg : 1, 2, 3, 4, 6, 6, 8, 10
+Here the optimal way is to buy at 1 and sell at 10. So net profit will be 9.
+According to my assumption,
+buy at 1, sell at 2, profit = 1
+buy at 2, sell at 3, profit = 1.
+buy at 3, sell at 4, profit = 1
+buy at 4, sell at 6, profit = 2
+buy at 6, sell at 8, profit = 2
+buy at 8, sell at 10, profit = 2
+So net profit = 9
+(So Assumption is true for Case 2)
+Assumption Proved
+So my assumption gives the right answer.
+
+Dividing into segments
+let the array be [7,1,5,3,6,4]
+segments will be [7,1] , [1,5] , [5,3] , [3,6] , [6,4] (other ways also possible)
+
+if we divide [5, 3, 2, 1, 3, 5] into [5, 3, 2, 1] and [3, 5].
+Then we will miss the profit that we can get by buying at price 1 and selling at price 3. As they both are in different segments.
+
+This is the reason why the last element of the previous segment should be the first element in the next segment, without considering the increasing/decreasing conditions.
+
+So best way(for easy implementation) to divide any prices array into segments is dividing into segments of 2 consecutive elements
+Eg : let the array be [7,1,5,3,6,4]
+segments will be [7,1] , [1,5] , [5,3] , [3,6] , [6,4]
+
+Implementation explanation
+Traverse through the prices vector from prices[0] to prices[n-2]
+
+if (prices[i+1] > prices[i])
+     buy at prices[i], sell at prices[i+1]
+     ans+=prices[i+1] - prices[i]
+else
+    do nothing.
+which can also be written as ans+=max(prices[i+1]-prices[i],0) ;
+
+Below is the code
+
+
+class Solution {
+public:
+    int maxProfit(vector<int>& prices)
+    {
+        int n = prices.size() , ans = 0 ;
+		
+        for(int i=0;i<n-1;i++)
+        {
+            ans+=(max(prices[i+1]-prices[i],0)) ;
+        }
+        
+        return ans ;
+    }
+};
